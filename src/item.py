@@ -40,3 +40,20 @@ class Item:
         """
         self.price *= self.pay_rate
 
+ @classmethod
+    def instantiate_from_csv(cls, file_path: str) -> None:
+        """
+        Инициализирует экземпляры класса Item данными из CSV-файла.
+        """
+        current_file_path = Path(__file__)
+        file_path = current_file_path.parent.parent / 'src/items.csv'
+
+        with open(file_path, 'r', encoding='windows-1251') as file:
+            cls.all.clear()
+            reader = csv.DictReader(file)
+            for row in reader:
+                name = row['name']
+                price = float(row['price'])
+                quantity = int(row['quantity'])
+                cls(name, price, quantity)
+
