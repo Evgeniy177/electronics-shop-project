@@ -40,7 +40,7 @@ class Item:
         """
         self.price *= self.pay_rate
 
- @classmethod
+   @classmethod
     def instantiate_from_csv(cls, file_path: str) -> None:
         """
         Инициализирует экземпляры класса Item данными из CSV-файла.
@@ -56,4 +56,13 @@ class Item:
                 price = float(row['price'])
                 quantity = int(row['quantity'])
                 cls(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(value: str) -> int:
+        """
+        Преобразует строку в число.
+        """
+        return int(float(value))
+
+Item.instantiate_from_csv('src/items.csv')
 
