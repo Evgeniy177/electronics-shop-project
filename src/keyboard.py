@@ -1,30 +1,25 @@
 from src.item import Item
 
 
-class Mixin_Lang:
-    """
-    Миксин для изменения языка клавиатуры.
-    """
+class MixinLang:
+    def __init__(self, language="EN"):
+        self.__language = language
 
-
-
+    @property
+    def language(self):
+        return self.__language
 
 
     def change_lang(self):
-        """
-        Метод для изменения языка клавиатуры.
-        """
-        if self.language == "EN":
-            self.language = "RU"
-        elif self.language == "RU":
-            self.language = "EN"
+        if self.__language == "EN":
+            self.__language = "RU"
+        else:
+            self.__language = "EN"
 
 
-
-class Keyboard(Mixin_Lang, Item):
-    """
-    Класс для представления товара "клавиатура" с возможностью изменения языка.
-    """
+class Keyboard(Item, MixinLang):
     def __init__(self, name: str, price: float, quantity: int, language="EN"):
-        super().__init__(name, price, quantity)
-        self.language = 'EN'
+        super().__init__(name, price,quantity)
+        MixinLang.__init__(self)
+
+
